@@ -1,3 +1,9 @@
 This is my test program to learn the Athena Widgets.
 
-When compiling, dependancies must be resolved manually.
+When compiling, broken dependancies must be resolved manually.
+
+requires:
+X11
+Xt
+Xaw
+libc
