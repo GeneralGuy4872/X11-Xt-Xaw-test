@@ -9,3 +9,14 @@ math
 X11
 Xt
 Xaw
+
+...This is going to be <sarc>fun</sarc>. I've got to:
+-take angles stored as:
+  -percentages (because xaw)
+  -signed shorts (because joysticks)
+-normalize those to radians (because maths)
+-convert them to degrees for display (because babalonians)
+-convert them to rotation matricies for OpenGL (because...idek)
+
+But more on that later at the main game repo
+https://github.com/GeneralGuy4872/iwannafly
