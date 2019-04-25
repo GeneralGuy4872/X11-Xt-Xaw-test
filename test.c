@@ -6,7 +6,9 @@
  * needed for my upcoming game.
  *****************************************************************************/
 
+#include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include "X11/StringDefs.h"
 #include "X11/Intrinsic.h"
 #include "X11/Xaw/Form.h"
@@ -14,6 +16,46 @@
 #include "X11/Xaw/Scrollbar.h"
 
 float North = 0;
+
+static void
+ThumbedAZ(w,null_ptr,scrl_ptr)
+Widget w;
+XtPointer null_ptr,scrl_ptr;
+{
+	float scrl = *((float *) scrl_ptr);
+
+	printf("A = %i\302\260\n",(int) (scrl * 360));
+}
+
+static void
+ThumbedALT(w,null_ptr,scrl_ptr)
+Widget w;
+XtPointer null_ptr,scrl_ptr;
+{
+	float scrl = *((float *) scrl_ptr);
+
+	printf("a = %i\302\260\n",(int) ((scrl * 180) - 90));
+}
+
+static void
+ThumbedR(w,null_ptr,scrl_ptr)
+Widget w;
+XtPointer null_ptr,scrl_ptr;
+{
+	float scrl = *((float *) scrl_ptr);
+
+	printf("r = %im\n",(int) ((scrl * -20) + 10));
+}
+
+static void
+ThumbedFOV(w,null_ptr,scrl_ptr)
+Widget w;
+XtPointer null_ptr,scrl_ptr;
+{
+	float scrl = *((float *) scrl_ptr);
+
+	printf("f = %i\302\260\n",(int) ((scrl * 225) + 45));
+}
 
 main(argc,argv)
 int argc;
@@ -118,8 +160,8 @@ char **argv;
 
 	n = 0;
 	XtSetArg(wargs[n],XtNleft,XawChainLeft); n++;
-	XtSetArg(wargs[n],XtNlabel,"Label2"); n++;
 	XtSetArg(wargs[n],XtNfromVert,label0); n++;
+	XtSetArg(wargs[n],XtNlabel,"Label2"); n++;
 	XtSetValues(label2,wargs,n);
 
 	label3 = XtCreateManagedWidget("Label3",labelWidgetClass,form1, NULL, 0);
@@ -164,6 +206,11 @@ char **argv;
 	XtSetArg(wargs[n],XtNfromHoriz,label2); n++;
 	XtSetArg(wargs[n],XtNlabel,"Label7"); n++;
 	XtSetValues(label7,wargs,n);
+
+	XtAddCallback(scrollAZ,XtNjumpProc,ThumbedAZ,NULL);
+	XtAddCallback(scrollALT,XtNjumpProc,ThumbedALT,NULL);
+	XtAddCallback(scrollR,XtNjumpProc,ThumbedR,NULL);
+	XtAddCallback(scrollFOV,XtNjumpProc,ThumbedFOV,NULL);
 
 	XtRealizeWidget(toplevel);
 
