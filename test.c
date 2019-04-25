@@ -34,7 +34,7 @@ XtPointer null_ptr,scrl_ptr;
 {
 	float scrl = *((float *) scrl_ptr);
 
-	printf("a = %i\302\260\n",(int) ((scrl * 180) - 90));
+	printf("a = %i\302\260\n",(int) ((scrl * -180) + 90));
 }
 
 static void
