@@ -3,7 +3,9 @@ This is my test program to learn the Athena Widgets.
 When compiling, broken dependancies must be resolved manually.
 
 requires:
+stdlib
+stdio
+math
 X11
 Xt
 Xaw
-libc
